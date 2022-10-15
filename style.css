@@ -2,6 +2,9 @@ body{
     /* display: none; */
     padding: 100px;
 }
+span{
+    color: darkblue;
+}
 .submit-area{
     /* display: none; */
     margin-top: 50px;
