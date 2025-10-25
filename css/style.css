@@ -71,7 +71,7 @@ body {
   font-weight: bold;
 }
 
-/* Navigation link styles */
+/* Navigation link Styles */
 .nav-link {
   position: relative;
   padding: 8px 16px;
@@ -107,7 +107,7 @@ body {
   width: 80%;
 }
 
-/* Smooth scrolling */
+/* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
 }
@@ -274,7 +274,7 @@ section.visible {
   }
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
   .logo-container {
     margin-bottom: 1rem;
@@ -297,7 +297,7 @@ section.visible {
   }
 }
 
-/* Print styles */
+/* Print */
 @media print {
   .no-print {
     display: none !important;

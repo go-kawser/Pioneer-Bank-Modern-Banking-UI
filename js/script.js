@@ -1,7 +1,4 @@
-// Pioneer Bank - Modern Banking Application
-// Main JavaScript File
-
-// Application State
+// JavaScript Code
 const state = {
   currentUser: null,
   balance: 1240,
@@ -86,9 +83,8 @@ const domElements = {
   navLinks: document.querySelectorAll(".nav-link"),
 };
 
-// Utility Functions
+// Utility Function
 const utils = {
-  // Format currency
   formatCurrency: (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -99,7 +95,6 @@ const utils = {
 
   // Show notification
   showToast: (message, type = "info") => {
-    // Remove existing toasts
     const existingToast = document.querySelector(".toast");
     if (existingToast) {
       existingToast.remove();
@@ -128,15 +123,15 @@ const utils = {
       toast.classList.add("show");
     }, 100);
 
-    // Hide toast after 5 seconds
+    // Hide toast after 3 seconds
     setTimeout(() => {
       toast.classList.remove("show");
       setTimeout(() => {
         if (toast.parentNode) {
           toast.parentNode.removeChild(toast);
         }
-      }, 300);
-    }, 5000);
+      }, 200);
+    }, 3000);
   },
 
   // Validate email
@@ -168,7 +163,6 @@ const utils = {
 
 // Form Validation
 const formValidation = {
-  // Login form validation
   validateLoginForm: () => {
     let isValid = true;
     const email = domElements.loginEmail.value.trim();
@@ -213,7 +207,7 @@ const formValidation = {
     return isValid;
   },
 
-  // Signup form validation
+  // Signup Rorm validation
   validateSignupForm: () => {
     let isValid = true;
     const firstname = domElements.signupFirstname.value.trim();
@@ -223,7 +217,7 @@ const formValidation = {
     const confirmPassword = domElements.signupConfirmPassword.value.trim();
     const terms = domElements.signupTerms.checked;
 
-    // Validate first name
+    // Validate First Name
     if (!firstname) {
       domElements.signupFirstnameError.classList.remove("hidden");
       domElements.signupFirstname.classList.add("input-error");
@@ -234,7 +228,7 @@ const formValidation = {
       domElements.signupFirstname.classList.add("input-success");
     }
 
-    // Validate last name
+    // Validate Last Name
     if (!lastname) {
       domElements.signupLastnameError.classList.remove("hidden");
       domElements.signupLastname.classList.add("input-error");
@@ -281,7 +275,7 @@ const formValidation = {
       domElements.signupPassword.classList.add("input-success");
     }
 
-    // Validate confirm password
+    // Validate Confirm Password
     if (!confirmPassword) {
       domElements.signupConfirmPasswordError.textContent =
         "Please confirm your password";
@@ -313,7 +307,6 @@ const formValidation = {
 
   // Clear form validation
   clearFormValidation: () => {
-    // Clear login form
     domElements.loginEmailError.classList.add("hidden");
     domElements.loginPasswordError.classList.add("hidden");
     domElements.loginEmail.classList.remove("input-error", "input-success");
@@ -341,14 +334,11 @@ const formValidation = {
   },
 };
 
-// Authentication Functions
+// Authentication
 const auth = {
-  // Login user
   login: (email, password) => {
-    // Simulate API call
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // Mock validation - in a real app, this would be a server call
         if (email && password) {
           const user = {
             id: utils.generateId(),
@@ -367,10 +357,8 @@ const auth = {
 
   // Signup user
   signup: (userData) => {
-    // Simulate API call
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // Mock validation - in a real app, this would be a server call
         if (
           userData.firstName &&
           userData.lastName &&
@@ -414,9 +402,8 @@ const auth = {
   },
 };
 
-// Transaction Functions
+// Transaction
 const transactions = {
-  // Add deposit
   addDeposit: (amount) => {
     if (amount <= 0) {
       domElements.depositError.textContent = "Please enter a valid amount";
@@ -508,7 +495,6 @@ const transactions = {
 
 // UI Update Functions
 const ui = {
-  // Update transaction UI
   updateTransactionUI: () => {
     domElements.currentDeposit.textContent = state.deposit.toFixed(2);
     domElements.currentWithdraw.textContent = state.withdraw.toFixed(2);
@@ -545,7 +531,7 @@ const ui = {
     });
   },
 
-  // Update navigation based on auth state
+  // Update navigation
   updateNavigation: () => {
     if (state.isLoggedIn) {
       domElements.navLogin.innerHTML = `
@@ -586,7 +572,6 @@ const ui = {
       domElements.navLogin.classList.remove("btn-ghost", "dropdown");
       domElements.navLogin.classList.add("btn-primary");
 
-      // Remove dropdown menu if exists
       const existingDropdown = domElements.navLogin.nextElementSibling;
       if (
         existingDropdown &&
@@ -671,7 +656,6 @@ const ui = {
 
 // Event Listeners
 const initEventListeners = () => {
-  // Show Signup Form
   domElements.showSignupBtn.addEventListener("click", () => {
     domElements.loginArea.classList.add("hidden");
     domElements.signupArea.classList.remove("hidden");
@@ -811,7 +795,6 @@ const initEventListeners = () => {
     const depositNumber = parseFloat(domElements.depositAmount.value);
 
     if (transactions.addDeposit(depositNumber)) {
-      // Success handled in the function
     }
   });
 
@@ -820,7 +803,6 @@ const initEventListeners = () => {
     const withdrawNumber = parseFloat(domElements.withdrawAmount.value);
 
     if (transactions.addWithdraw(withdrawNumber)) {
-      // Success handled in the function
     }
   });
 
@@ -854,10 +836,8 @@ const initEventListeners = () => {
   // Navigation links
   domElements.navLinks.forEach((link) => {
     link.addEventListener("click", (e) => {
-      // Remove active class from all links
       domElements.navLinks.forEach((l) => l.classList.remove("active"));
 
-      // Add active class to clicked link
       link.classList.add("active");
 
       // Close mobile menu if open
@@ -918,8 +898,6 @@ const initApp = () => {
 
   // Initialize scroll animations
   ui.initScrollAnimations();
-
-  // Check if user is already logged in (from localStorage)
   const savedUser = localStorage.getItem("pioneer-bank-user");
   if (savedUser) {
     try {
@@ -944,5 +922,4 @@ const initApp = () => {
   console.log("Pioneer Bank application initialized successfully!");
 };
 
-// Start the application when DOM is loaded
 document.addEventListener("DOMContentLoaded", initApp);
